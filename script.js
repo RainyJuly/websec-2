@@ -35,7 +35,6 @@ window.onload = async () => {
             }
             const popup = new mapboxgl.Popup({offset: 25})
             popup.on('open', async () => {
-                //console.log(stop)
                 console.log("opened")
                 let stop_info = await getFirstArrivalToStop(stop.KS_ID)
                 let popup_window = document.createElement("div");
@@ -63,7 +62,6 @@ window.onload = async () => {
                     if(checkInSaved(stop.KS_ID)){
                         saved_stop = saved_stop.filter((filter_stop) => { return filter_stop.KS_ID !== stop.KS_ID });
                         regenerateSavedStop()
-                        //save_stop_button.textContent = "Избранное"
                     }
                     else
                     {
@@ -76,11 +74,8 @@ window.onload = async () => {
                                 y: parseFloat(stop.longitude) }
                         })
                         regenerateSavedStop()
-                        //save_stop_button.textContent = "Удалить"
-                        //console.log("Delete")
                     }
                     localStorage.setItem("saved_stop", JSON.stringify(saved_stop));
-                    //console.log(saved_stop)
                 })
                 
                 
@@ -153,7 +148,6 @@ function regenerateSavedStop(){
         transport_saved_stop.addEventListener("click", ()=>{
             map.setCenter({lng: stop.metrics.y, lat: stop.metrics.x})
             map.setZoom(16)
-            console.log("CLICKED")
         })
         window_saved_stop.append(transport_saved_stop)
     })
